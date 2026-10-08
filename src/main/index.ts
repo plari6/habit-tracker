@@ -77,7 +77,7 @@ function createWindow(): void {
     minWidth: 1100,
     minHeight: 680,
     show: false,
-    backgroundColor: '#0b0f0e',
+    backgroundColor: '#f7f4fd',
     autoHideMenuBar: true,
     title: 'Habit Tracker',
     webPreferences: {

@@ -96,7 +96,7 @@ function Chat({ coach }: { coach: CoachState }) {
       </div>
 
       {coach.error && (
-        <p className="selectable mx-5 mb-2 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-300">
+        <p className="selectable mx-5 mb-2 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-700">
           {coach.error}
         </p>
       )}
@@ -216,8 +216,8 @@ function ApiKey({ coach }: { coach: CoachState }) {
     <section className="rounded-2xl border border-line bg-surface px-5 py-4">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-semibold">API key</h2>
-        <span className={`flex items-center gap-1.5 text-xs ${hasKey ? 'text-emerald-400' : 'text-muted'}`}>
-          <span className={`size-1.5 rounded-full ${hasKey ? 'bg-emerald-400' : 'bg-muted'}`} />
+        <span className={`flex items-center gap-1.5 text-xs ${hasKey ? 'text-emerald-600' : 'text-muted'}`}>
+          <span className={`size-1.5 rounded-full ${hasKey ? 'bg-emerald-600' : 'bg-muted'}`} />
           {source === 'stored' ? 'Saved, encrypted' : source === 'env' ? 'From ANTHROPIC_API_KEY' : 'Not set'}
         </span>
       </div>
@@ -242,7 +242,7 @@ function ApiKey({ coach }: { coach: CoachState }) {
           <button
             type="button"
             onClick={() => void coach.clearKey()}
-            className="h-8 rounded-lg px-2 text-xs text-muted hover:text-red-400"
+            className="h-8 rounded-lg px-2 text-xs text-muted hover:text-red-600"
           >
             Remove
           </button>

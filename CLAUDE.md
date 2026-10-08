@@ -8,5 +8,5 @@
 
 ## Rules & Standards
 - Keep database strictly local (`data/habits.db`).
-- Primary color palette: Dark theme with emerald/teal accents.
+- Primary color palette: Light theme, white background with light purple (violet) accents.
 - Commit clean progress at the end of each functional step.

@@ -109,7 +109,7 @@ export default function Tracker({ snapshot, stats, onToggle, onAdd, onArchive }:
         </div>
       </div>
       <p className="mt-3 text-xs text-muted">
-        Click a white dot on the day you did a habit and it fills with the habit&apos;s color. Click again to undo.
+        Click a black dot on the day you did a habit and it fills with the habit&apos;s color. Click again to undo.
       </p>
     </div>
   )
@@ -153,7 +153,7 @@ function CategoryBlock({ category, habits, days, now, columns, stats, onToggle, 
   return (
     <section className="mt-3 border-t border-line pt-2">
       <div className="mb-1 flex h-7 items-center gap-3">
-        <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-2">{category.name}</h2>
+        <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">{category.name}</h2>
         {rate.scheduled > 0 && <span className="text-[11px] tabular-nums text-muted">{pct(rate)}% this month</span>}
         {adding ? (
           <form onSubmit={submit} className="flex items-center gap-1.5">
@@ -195,7 +195,7 @@ function CategoryBlock({ category, habits, days, now, columns, stats, onToggle, 
                     void onArchive(habit.id)
                   }
                 }}
-                className="ml-auto hidden text-sm leading-none text-muted hover:text-red-400 group-hover:block"
+                className="ml-auto hidden text-sm leading-none text-muted hover:text-red-600 group-hover:block"
               >
                 ×
               </button>
@@ -212,7 +212,7 @@ function CategoryBlock({ category, habits, days, now, columns, stats, onToggle, 
                     title={`${habit.name} · ${formatDay(d)}`}
                     onClick={() => onToggle(habit.id, d)}
                     className={`size-[18px] rounded-full transition-transform ${
-                      done ? 'dot-done' : future ? 'bg-white/10' : 'bg-zinc-100 hover:scale-125'
+                      done ? 'dot-done' : future ? 'bg-black/10' : 'bg-zinc-900 hover:scale-125'
                     }`}
                     style={done ? { background: habit.color, boxShadow: `0 0 10px ${habit.color}80` } : undefined}
                   />

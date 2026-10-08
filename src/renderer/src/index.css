@@ -1,19 +1,20 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-page: #0b0f0e;
-  --color-surface: #131918;
-  --color-raised: #1b2321;
-  --color-line: #26302d;
-  --color-ink: #f2f5f4;
-  --color-ink-2: #b7c1bd;
-  --color-muted: #7f8b87;
-  --color-accent: #10b981;
-  --color-accent-2: #14b8a6;
+  --color-page: #f7f4fd;
+  --color-surface: #ffffff;
+  --color-raised: #f1ebfc;
+  --color-line: #e3daf5;
+  --color-axis: #c4b8de;
+  --color-ink: #1d1a2b;
+  --color-ink-2: #4d4866;
+  --color-muted: #827c9c;
+  --color-accent: #7c3aed;
+  --color-accent-2: #a78bfa;
   /* Chart series, one per area. Validated as a set against --color-surface. */
-  --color-work: #3987e5;
-  --color-life: #199e70;
-  --color-hygiene: #d95926;
+  --color-work: #2a78d6;
+  --color-life: #1baf7a;
+  --color-hygiene: #eb6834;
   --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 

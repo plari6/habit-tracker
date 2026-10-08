@@ -49,7 +49,7 @@ export default function Markdown({ text }: { text: string }) {
     const heading = /^#{1,4}\s+(.*)$/.exec(line)
     blocks.push(
       heading ? (
-        <h3 key={blocks.length} className="pt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent-2">
+        <h3 key={blocks.length} className="pt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
           {heading[1]}
         </h3>
       ) : (

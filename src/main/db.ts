@@ -77,6 +77,7 @@ export class HabitDb {
       );
     `)
     this.seed()
+    this.migrate()
   }
 
   private seed(): void {
@@ -91,6 +92,31 @@ export class HabitDb {
       const categoryId = addCategory.run(category, ci).lastInsertRowid
       habits.forEach(([name, color], hi) => addHabit.run(categoryId, name, color, hi, createdOn))
     })
+  }
+
+  /** One-off changes to databases created by earlier versions, tracked by user_version. */
+  private migrate(): void {
+    const { user_version: version } = this.db.prepare('PRAGMA user_version').get() as { user_version: number }
+    if (version < 1) {
+      this.ensureHabit('Work', 'Tape reading', '#22d3ee')
+      this.ensureHabit('Work', 'Trade journaling', '#fb923c')
+      this.db.exec('PRAGMA user_version = 1')
+    }
+  }
+
+  private ensureHabit(categoryName: string, name: string, color: string): void {
+    const category = this.db.prepare('SELECT id FROM categories WHERE name = ?').get(categoryName) as
+      | { id: number }
+      | undefined
+    if (!category) return
+    const existing = this.db.prepare('SELECT 1 FROM habits WHERE category_id = ? AND name = ?').get(category.id, name)
+    if (existing) return
+    const { sort } = this.db
+      .prepare('SELECT COALESCE(MAX(sort), -1) + 1 AS sort FROM habits WHERE category_id = ?')
+      .get(category.id) as { sort: number }
+    this.db
+      .prepare('INSERT INTO habits (category_id, name, color, sort, created_on) VALUES (?, ?, ?, ?, ?)')
+      .run(category.id, name, color, sort, today())
   }
 
   /** One consistent copy of the database per day, keeping the most recent few. */

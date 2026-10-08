@@ -81,7 +81,7 @@ export default function App() {
   return (
     <div className="flex h-full">
       <nav className="flex w-[76px] shrink-0 flex-col items-center gap-1 border-r border-line bg-surface py-4">
-        <div className="mb-4 grid size-9 place-items-center rounded-xl bg-gradient-to-br from-accent to-accent-2 text-sm font-bold text-page">
+        <div className="mb-4 grid size-9 place-items-center rounded-xl bg-gradient-to-br from-accent to-accent-2 text-sm font-bold text-white">
           H
         </div>
         {NAV.map((item) => (

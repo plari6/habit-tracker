@@ -77,7 +77,7 @@ export default function Analytics({ snapshot, stats }: Props) {
             `${overall.done} of ${overall.scheduled} check-ins`
           ) : (
             <span>
-              <span className={change >= 0 ? 'text-emerald-400' : 'text-red-400'}>
+              <span className={change >= 0 ? 'text-emerald-600' : 'text-red-600'}>
                 {change >= 0 ? '▲' : '▼'} {Math.abs(change)} pts
               </span>{' '}
               vs previous {range} days
@@ -248,7 +248,7 @@ function LineChart({ points }: { points: { date: string; rate: Rate }[] }) {
               x2={width - PAD.right}
               y1={y(tick)}
               y2={y(tick)}
-              stroke={tick === 0 ? '#3a4541' : 'var(--color-line)'}
+              stroke={tick === 0 ? 'var(--color-axis)' : 'var(--color-line)'}
             />
             <text x={PAD.left - 8} y={y(tick) + 3.5} textAnchor="end" fontSize="10" fill="var(--color-muted)">
               {tick}%

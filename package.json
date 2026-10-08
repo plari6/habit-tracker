@@ -1,5 +1,6 @@
 {
   "name": "habit-tracker",
+  "productName": "Habit Tracker",
   "version": "1.0.0",
   "description": "Local habit tracker with analytics and an AI performance coach",
   "private": true,
@@ -8,7 +9,8 @@
     "dev": "electron-vite dev",
     "build": "electron-vite build",
     "start": "electron-vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "package": "electron-vite build && electron-packager . \"Habit Tracker\" --platform=win32 --arch=x64 --out=dist --overwrite --asar --icon=build/icon.ico --ignore=\"^/(src|data|build|dist|.claude|.vscode|CLAUDE.md|tsconfig.json|electron.vite.config.ts|.gitignore)\""
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.132.1",
@@ -16,6 +18,7 @@
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@electron/packager": "^20.3.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^26.6.4",
     "@types/react": "^19.3.0",
