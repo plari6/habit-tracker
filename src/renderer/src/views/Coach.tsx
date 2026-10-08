@@ -113,7 +113,7 @@ function Chat({ coach }: { coach: CoachState }) {
               void send(draft)
             }
           }}
-          placeholder={coach.status.hasKey ? 'Ask your coach…' : 'Add an API key on the right to start chatting'}
+          placeholder={coach.status.hasKey ? 'Ask your coach…' : 'Add a Google AI Studio key on the right to start chatting'}
           className="selectable max-h-32 min-h-10 flex-1 resize-none rounded-xl border border-line bg-raised px-3 py-2.5 text-sm outline-none placeholder:text-muted focus:border-accent disabled:opacity-60"
         />
         <button
@@ -215,10 +215,10 @@ function ApiKey({ coach }: { coach: CoachState }) {
   return (
     <section className="rounded-2xl border border-line bg-surface px-5 py-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-semibold">API key</h2>
+        <h2 className="text-sm font-semibold">Google AI Studio API key</h2>
         <span className={`flex items-center gap-1.5 text-xs ${hasKey ? 'text-emerald-600' : 'text-muted'}`}>
           <span className={`size-1.5 rounded-full ${hasKey ? 'bg-emerald-600' : 'bg-muted'}`} />
-          {source === 'stored' ? 'Saved, encrypted' : source === 'env' ? 'From ANTHROPIC_API_KEY' : 'Not set'}
+          {source === 'stored' ? 'Saved, encrypted' : source === 'env' ? 'From GEMINI_API_KEY' : 'Not set'}
         </span>
       </div>
       <form onSubmit={submit} className="mt-3 flex gap-2">
@@ -226,7 +226,7 @@ function ApiKey({ coach }: { coach: CoachState }) {
           type="password"
           value={key}
           onChange={(e) => setKey(e.target.value)}
-          placeholder={source === 'stored' ? 'Replace key' : 'sk-ant-…'}
+          placeholder={source === 'stored' ? 'Replace key' : 'Paste your Gemini API key'}
           autoComplete="off"
           spellCheck={false}
           className="selectable h-8 min-w-0 flex-1 rounded-lg border border-line bg-raised px-2 text-xs outline-none placeholder:text-muted focus:border-accent"
@@ -249,7 +249,7 @@ function ApiKey({ coach }: { coach: CoachState }) {
         )}
       </form>
       <p className="mt-3 text-[11px] leading-relaxed text-muted">
-        Your habits stay in a local database. A summary of your check-ins is sent to the Anthropic API only when you
+        Your habits stay in a local database. A summary of your check-ins is sent to Google's Gemini API only when you
         chat or generate an evaluation. The key is encrypted by Windows before it is saved.
       </p>
     </section>

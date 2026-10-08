@@ -13,7 +13,7 @@
     "package": "electron-vite build && electron-packager . \"Habit Tracker\" --platform=win32 --arch=x64 --out=dist --overwrite --asar --icon=build/icon.ico --ignore=\"^/(src|data|build|dist|.claude|.vscode|CLAUDE.md|tsconfig.json|electron.vite.config.ts|.gitignore)\""
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.132.1",
+    "@google/genai": "^2.28.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },

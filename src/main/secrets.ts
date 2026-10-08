@@ -9,10 +9,15 @@ export class Secrets {
   private file: string
 
   constructor(dataDir: string) {
-    this.file = join(dataDir, 'anthropic-key.bin')
+    this.file = join(dataDir, 'gemini-key.bin')
   }
 
+  /** The saved key, falling back to the GEMINI_API_KEY environment variable. */
   apiKey(): string | null {
+    return this.storedKey() ?? process.env.GEMINI_API_KEY ?? null
+  }
+
+  private storedKey(): string | null {
     if (!existsSync(this.file) || !safeStorage.isEncryptionAvailable()) return null
     try {
       return safeStorage.decryptString(readFileSync(this.file))
@@ -33,8 +38,8 @@ export class Secrets {
   }
 
   status(): CoachStatus {
-    if (this.apiKey()) return { hasKey: true, source: 'stored' }
-    if (process.env.ANTHROPIC_API_KEY) return { hasKey: true, source: 'env' }
+    if (this.storedKey()) return { hasKey: true, source: 'stored' }
+    if (process.env.GEMINI_API_KEY) return { hasKey: true, source: 'env' }
     return { hasKey: false, source: null }
   }
 }

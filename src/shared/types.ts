@@ -40,7 +40,7 @@ export interface Evaluation {
 
 export interface CoachStatus {
   hasKey: boolean
-  /** Where the key comes from; `env` means ANTHROPIC_API_KEY. */
+  /** Where the key comes from; `env` means GEMINI_API_KEY. */
   source: 'stored' | 'env' | null
 }
 
