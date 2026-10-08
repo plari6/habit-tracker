@@ -1,0 +1,63 @@
+import { Fragment, type ReactNode } from 'react'
+
+// Renders the small markdown subset the coach is asked to use: paragraphs,
+// "#" headings, "-" / "1." lists and **bold**.
+
+function inline(text: string): ReactNode[] {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') && part.length > 4 ? (
+      <strong key={i} className="font-semibold text-ink">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      <Fragment key={i}>{part}</Fragment>
+    )
+  )
+}
+
+export default function Markdown({ text }: { text: string }) {
+  const blocks: ReactNode[] = []
+  let list: { ordered: boolean; items: string[] } | null = null
+
+  const flush = (): void => {
+    if (!list) return
+    const Tag = list.ordered ? 'ol' : 'ul'
+    blocks.push(
+      <Tag key={blocks.length} className={`space-y-1 pl-5 ${list.ordered ? 'list-decimal' : 'list-disc'}`}>
+        {list.items.map((item, i) => (
+          <li key={i}>{inline(item)}</li>
+        ))}
+      </Tag>
+    )
+    list = null
+  }
+
+  for (const raw of text.split('\n')) {
+    const line = raw.trim()
+    const bullet = /^[-*•]\s+(.*)$/.exec(line)
+    const numbered = /^\d+[.)]\s+(.*)$/.exec(line)
+    const item = bullet ?? numbered
+    if (item) {
+      const ordered = !bullet
+      if (list && list.ordered !== ordered) flush()
+      list ??= { ordered, items: [] }
+      list.items.push(item[1])
+      continue
+    }
+    flush()
+    if (!line) continue
+    const heading = /^#{1,4}\s+(.*)$/.exec(line)
+    blocks.push(
+      heading ? (
+        <h3 key={blocks.length} className="pt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent-2">
+          {heading[1]}
+        </h3>
+      ) : (
+        <p key={blocks.length}>{inline(line)}</p>
+      )
+    )
+  }
+  flush()
+
+  return <div className="selectable space-y-2 leading-relaxed">{blocks}</div>
+}
